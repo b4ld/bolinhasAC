@@ -26,7 +26,7 @@ public class Grid {
 
     }
 
-    public void drawCell(){
+    public void drawCell(){//DESENHAR GRELHA
 
         //DRAW ALL THE CELLS
 

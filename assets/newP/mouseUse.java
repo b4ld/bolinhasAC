@@ -20,7 +20,8 @@ public class mouseUse implements MouseHandler {
     private boolean isFirst = true;
 
 
-    public mouseUse(Grid myGrid) {
+    public mouseUse(Grid myGrid)
+    {
         this.myGrid = myGrid;
     }
 
