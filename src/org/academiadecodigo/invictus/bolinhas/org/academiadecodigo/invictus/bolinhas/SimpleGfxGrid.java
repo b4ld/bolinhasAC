@@ -1,4 +1,4 @@
-package org.academiadecodigo.GroupProject1;
+package org.academiadecodigo.invictus.bolinhas;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;

@@ -1,4 +1,4 @@
-package org.academiadecodigo.GroupProject1;
+package org.academiadecodigo.invictus.bolinhas;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
@@ -57,13 +57,13 @@ public class Board {
 
                 //Create a new Image;
                 if (random == 0) {
-                    picturesArray[i][j] = new Picture(inPosX, inPosY, "assets/blue.png");
+                    picturesArray[i][j] = new Picture(inPosX, inPosY, "assets/_img/blue.png");
                 }
                 if (random == 1) {
-                    picturesArray[i][j] = new Picture(inPosX, inPosY, "assets/red.png");
+                    picturesArray[i][j] = new Picture(inPosX, inPosY, "assets/_img/red.png");
                 }
                 if (random == 2) {
-                    picturesArray[i][j] = new Picture(inPosX, inPosY, "assets/yellow.png");
+                    picturesArray[i][j] = new Picture(inPosX, inPosY, "assets/_img/yellow.png");
                 }
 
                 inPosX = inPosX + CELL_SIZE;

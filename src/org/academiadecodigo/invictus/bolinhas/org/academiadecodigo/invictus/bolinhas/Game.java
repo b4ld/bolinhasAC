@@ -1,4 +1,6 @@
-package org.academiadecodigo.GroupProject1;
+package org.academiadecodigo.invictus.bolinhas;
+
+
 
 
 import org.academiadecodigo.simplegraphics.mouse.Mouse;

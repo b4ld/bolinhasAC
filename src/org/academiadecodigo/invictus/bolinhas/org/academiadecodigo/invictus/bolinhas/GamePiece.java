@@ -1,4 +1,4 @@
-package org.academiadecodigo.GroupProject1;
+package org.academiadecodigo.invictus.bolinhas;
 
 public enum GamePiece {
 
