@@ -2,16 +2,20 @@ package org.academiadecodigo.invictus.bolinhas;
 
 public enum GamePiece {
 
-    AZUL("Azul"),
-    VERDE("Verde"),
-    AMARELO("Amarelo"),
-    VERMELHO("Vermelho"),
-    ROSA("Rosa"),
-    LARANJA("Laranja");
+    AZUL("assets/blue.png"),
+    VERDE("assets/green.png"),
+    AMARELO("assets/yellow.png"),
+    VERMELHO("assets/red.png"),
+    ROSA("assets/pink.png"),
+    LARANJA("assets/orange.png");
 
-    private String nameGamePiece;
+    private String pieceAsset;
 
-    GamePiece(String nameGamePiece) {
-        this.nameGamePiece = nameGamePiece;
+    GamePiece(String pieceAsset) {
+        this.pieceAsset = pieceAsset;
+    }
+
+    public String getPieceAsset() {
+        return this.pieceAsset;
     }
 }
