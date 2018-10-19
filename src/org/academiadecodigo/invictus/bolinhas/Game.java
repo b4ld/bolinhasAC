@@ -98,7 +98,10 @@ public class Game {
                 isFirst = true;
 
                 //testes entram aqui
-                //  game.SwapPiece(primeiroX, primeiroY, segundoX, segundoY);
+
+
+               // game.SwapPiece(primeiroX, primeiroY, segundoX, segundoY);
+
             }
 
         }

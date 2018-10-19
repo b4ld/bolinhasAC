@@ -5,7 +5,9 @@ public enum GamePiece {
     AZUL("Azul"),
     VERDE("Verde"),
     AMARELO("Amarelo"),
-    VERMELHO("Vermelho");
+    VERMELHO("Vermelho"),
+    ROSA("Rosa"),
+    LARANJA("Laranja");
 
     private String nameGamePiece;
 
