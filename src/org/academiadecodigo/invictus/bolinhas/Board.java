@@ -8,7 +8,6 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class Board {
 
 
-
     //----------------------------------->
 
     public int TOTAL_COLUMNS = 10;
@@ -94,12 +93,27 @@ public class Board {
 
 
 
+    /*
+
+//Codigo que verifica de so meche uma casa - Rui-----------------
+
+
+public boolean canSwap(int XprimeiroClick,int YprimeiroClick,int XsegundoClick,int YsegundoClick){
+
+        int moveX=Math.abs(XprimeiroClick-XsegundoClick);
+        int moveY=Math.abs(YprimeiroClick-YsegundoClick);
+
+
+        return(moveX==0&&moveY==1)||(moveX==10&&moveY==0);
+        }
 
 
 
 
 
 
+
+  */
 
 
 }
