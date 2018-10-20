@@ -61,49 +61,34 @@ public class Game {
         gameArray[row_FirstClick][col_FirstClick] = gameArray[row_SecondClick][col_SecondClick];
         gameArray[row_SecondClick][col_SecondClick] = temp;
 
-    //    HashSet<Point> matches = new HashSet<>(); //basta uma lista para os testes de ambos os lados, mas, para testes, usar uma para cada tree
-
         HashSet<Point> matchesFirst = new HashSet<>();
         HashSet<Point> matchesSecond = new HashSet<>();
 
         locateNeighbors(row_FirstClick, col_FirstClick, pointAt(row_FirstClick,col_FirstClick), matchesFirst);
         locateNeighbors(row_SecondClick, col_SecondClick, pointAt(row_SecondClick,col_SecondClick), matchesSecond);
 
-//        locateNeighbors(row_FirstClick, col_FirstClick, pointAt(row_FirstClick,col_FirstClick), matches);
-//        locateNeighbors(row_SecondClick, col_SecondClick, pointAt(row_SecondClick,col_SecondClick), matches);
-
-        System.out.println(matchesFirst.size());
-        System.out.println(matchesSecond.size());
-
-//        System.out.println(matches.size());
-
-//        System.out.println(findConnectedPieces(row_FirstClick, col_FirstClick, gameArray));
-//        System.out.println("first counted");
-//        System.out.println(findConnectedPieces(row_SecondClick, col_SecondClick, gameArray));
-//        System.out.println("second counted");
-
-        /*
+   //     System.out.println(matchesFirst.size());
+   //     System.out.println(matchesSecond.size());
 
         //conta pecas similares aquelas que foram swapped
-        if (findConnectedPieces(row_FirstClick, col_FirstClick, gameArray) >= 3) {
-            System.out.println("ping");
+        if ( matchesFirst.size() >= 3) {
+            System.out.println("first");
         //    detonate(row_FirstClick, col_FirstClick, gameArray);
         }
 
-        if (findConnectedPieces(row_SecondClick, col_SecondClick, gameArray) >= 3) {
-            System.out.println("pong");
+        if (matchesSecond.size() >= 3) {
+            System.out.println("second");
       //      detonate(row_SecondClick, col_SecondClick, gameArray);
         }
 
         //testes explosoes e etc
-        System.out.println("wrwrw");
-        System.out.println("wrwrw");
 
         //desenha peças trocadas se nada explodiu e tal
-      //  gameBoard.drawPiece(row_FirstClick, col_FirstClick, gameArray[row_FirstClick][col_FirstClick]);
-      //  gameBoard.drawPiece(row_SecondClick, col_SecondClick, gameArray[row_SecondClick][col_SecondClick]);
+//        gameBoard.drawPiece(row_FirstClick, col_FirstClick, gameArray[row_FirstClick][col_FirstClick]);
+//        gameBoard.drawPiece(row_SecondClick, col_SecondClick, gameArray[row_SecondClick][col_SecondClick]);
 
-*/
+        gameBoard.drawAllPieces(gameArray);
+
 
     }
 

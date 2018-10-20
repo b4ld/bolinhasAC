@@ -35,9 +35,18 @@ public class Board {
 
     public void drawPiece(int row, int col, GamePiece piece) {
 
-        System.out.println(row + " - " + col + " : " + piece.getPieceAsset());
+   //     System.out.println(row + " - " + col + " : " + piece.getPieceAsset());
         picturesArray[row][col] = new Picture(col * CELL_SIZE + PADDING, row * CELL_SIZE + PADDING, piece.getPieceAsset());
         picturesArray[row][col].draw();
+    }
+
+    public void drawAllPieces(GamePiece[][] gameArray){
+
+        for (int row = 0; row < gameArray.length; row++) {
+            for (int col = 0; col < gameArray[0].length; col++) {
+                drawPiece(row,col, gameArray[row][col]);
+            }
+        }
     }
 
 
