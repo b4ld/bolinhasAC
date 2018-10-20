@@ -4,6 +4,7 @@ import org.academiadecodigo.simplegraphics.mouse.Mouse;
 import org.academiadecodigo.simplegraphics.mouse.MouseEvent;
 import org.academiadecodigo.simplegraphics.mouse.MouseEventType;
 import org.academiadecodigo.simplegraphics.mouse.MouseHandler;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.awt.*;
 import java.util.HashSet;
@@ -19,7 +20,9 @@ public class Game {
     MouseEvent mouseEvent;
 
 
+    private Picture startMenuBackground = new Picture(Board.PADDING, Board.PADDING, "assets/logobolinhas.png");
     private Board gameBoard;
+    private Boolean outOfBackground = false;
 
     private GamePiece[][] gameArray;
 
@@ -30,6 +33,20 @@ public class Game {
         mouseBoard.addEventListener(MouseEventType.MOUSE_CLICKED);
 
         gameBoard = new Board();
+
+        //Draw the background
+        startMenuBackground.draw();
+    }
+
+    public void startMenuInit() {
+
+        System.out.println("oksndfpivnhif");
+        startMenuBackground.delete();
+        System.out.println("deleted image");
+        gameInit();
+        System.out.println("Game initiated");
+
+
     }
 
 
@@ -155,8 +172,8 @@ public class Game {
 
         while (detonations.hasNext()) {
             Point point = detonations.next();
-            gameArray[point.x][point.y]= GamePiece.DETONATION;
-            gameArray[point.x][point.y]= GamePiece.DETONATION;
+            gameArray[point.x][point.y] = GamePiece.DETONATION;
+            gameArray[point.x][point.y] = GamePiece.DETONATION;
         }
 
     }
@@ -234,7 +251,6 @@ public class Game {
 */
 
 
-
     class MouseInputHandler implements MouseHandler {
 
         int col_FirstClick;
@@ -257,27 +273,33 @@ public class Game {
 
             //myGrid.removeImg(X_mouse,Y_mouse);
 
-            if (isFirstClick) {
-                col_FirstClick = X_mouse;
-                row_FirstClick = Y_mouse;
-                System.out.println("First Click");
-                isFirstClick = false;
 
-                //myGrid.fillCell(col_FirstClick,row_FirstClick);
-
-            } else {
-                col_SecondClick = X_mouse;
-                row_SecondClick = Y_mouse;
-                System.out.println("Second click");
-
-                isFirstClick = true;
-
-                //testes entram aqui
-
-                if (testSwap(col_FirstClick, row_FirstClick, col_SecondClick, row_SecondClick)) {//se jogada valida (distancia de clicks = 1)
-                    swapPiece(col_FirstClick, row_FirstClick, col_SecondClick, row_SecondClick);
+            //Flag to exit of StartBackgroundImage after click START
+            if (!outOfBackground) {
+                if ((X_mouse == 4 || X_mouse == 5) && (Y_mouse == 3 || Y_mouse == 4)) {
+                    System.out.println("startMenuInit");
+                    startMenuInit();
+                    outOfBackground = true;
                 }
+            } else {
+                if (isFirstClick) {
+                    col_FirstClick = X_mouse;
+                    row_FirstClick = Y_mouse;
+                    System.out.println("First Click");
+                    isFirstClick = false;
 
+                    //myGrid.fillCell(col_FirstClick,row_FirstClick);
+                } else {
+                    col_SecondClick = X_mouse;
+                    row_SecondClick = Y_mouse;
+                    System.out.println("Second click");
+                    isFirstClick = true;
+                    //testes entram aqui
+                    if (testSwap(col_FirstClick, row_FirstClick, col_SecondClick, row_SecondClick)) {//se jogada valida (distancia de clicks = 1)
+                        swapPiece(col_FirstClick, row_FirstClick, col_SecondClick, row_SecondClick);
+                    }
+
+                }
             }
 
         }
