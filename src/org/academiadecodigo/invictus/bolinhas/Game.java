@@ -111,6 +111,8 @@ public class Game {
 
         GamePiece testValue = array[a][b];
 
+        if(testValue==GamePiece.LARANJA) return 0; //a explosao ja passou por aqui, salta fora
+
         int up = 0;
         int down = 0;
         int right = 0;
