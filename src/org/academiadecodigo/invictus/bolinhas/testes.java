@@ -62,9 +62,13 @@ public class Testes {
 
             if(x < rows && y < columns) {
                 Gem g = this.at(x, y);
+
                 HashSet<Point> matches = new HashSet<Point>();
+
                 locateNeighbors(x, y, g.getColor(), matches);
+
                 System.out.println(matches.size() + " matches found.");
+
             }
 
         }
