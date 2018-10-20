@@ -7,6 +7,7 @@ import org.academiadecodigo.simplegraphics.mouse.MouseHandler;
 
 import java.awt.*;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class Game {
 
@@ -41,9 +42,10 @@ public class Game {
         for (int row = 0; row < TOTAL_ROWS; row++) {
             for (int col = 0; col < TOTAL_COLUMNS; col++) {
                 gameArray[row][col] = GamePieceFactory.getNewPiece();
-                gameBoard.drawPiece(row, col, gameArray[row][col]);
             }
         }
+
+        gameBoard.drawInitPieces(gameArray);
 
     }
 
@@ -64,21 +66,21 @@ public class Game {
         HashSet<Point> matchesFirst = new HashSet<>();
         HashSet<Point> matchesSecond = new HashSet<>();
 
-        locateNeighbors(row_FirstClick, col_FirstClick, pointAt(row_FirstClick,col_FirstClick), matchesFirst);
-        locateNeighbors(row_SecondClick, col_SecondClick, pointAt(row_SecondClick,col_SecondClick), matchesSecond);
+        locateNeighbors(row_FirstClick, col_FirstClick, pointAt(row_FirstClick, col_FirstClick), matchesFirst);
+        locateNeighbors(row_SecondClick, col_SecondClick, pointAt(row_SecondClick, col_SecondClick), matchesSecond);
 
-   //     System.out.println(matchesFirst.size());
-   //     System.out.println(matchesSecond.size());
+        //     System.out.println(matchesFirst.size());
+        //     System.out.println(matchesSecond.size());
 
         //conta pecas similares aquelas que foram swapped
-        if ( matchesFirst.size() >= 3) {
+        if (matchesFirst.size() >= 3) {
             System.out.println("first");
-        //    detonate(row_FirstClick, col_FirstClick, gameArray);
+            detonate(matchesFirst);
         }
 
         if (matchesSecond.size() >= 3) {
             System.out.println("second");
-      //      detonate(row_SecondClick, col_SecondClick, gameArray);
+            detonate(matchesSecond);
         }
 
         //testes explosoes e etc
@@ -121,13 +123,13 @@ public class Game {
         }
 
         //Check east
-        if (col + 1 < gameArray[0].length){
+        if (col + 1 < gameArray[0].length) {
             if (pointAt(row, col + 1) == color)
                 locateNeighbors(row, col + 1, color, matches);
         }
 
         //Check south
-        if (row + 1 < gameArray.length){
+        if (row + 1 < gameArray.length) {
             if (pointAt(row + 1, col) == color)
                 locateNeighbors(row + 1, col, color, matches);
         }
@@ -145,6 +147,21 @@ public class Game {
         }
 
     }
+
+
+    public void detonate(HashSet<Point> matches) {//marca com null os estouros
+
+        Iterator<Point> detonations = matches.iterator();
+
+        while (detonations.hasNext()) {
+            Point point = detonations.next();
+            gameArray[point.x][point.y]= GamePiece.DETONATION;
+            gameArray[point.x][point.y]= GamePiece.DETONATION;
+        }
+
+    }
+
+
 
     /*
 
@@ -184,7 +201,7 @@ public class Game {
         return up + left + right + down + 1;
     }
 
-*/
+
 
     public void detonate(int row, int col, GamePiece[][] array) {//marca com null os estouros
 
@@ -213,6 +230,9 @@ public class Game {
 
 
     }
+
+*/
+
 
 
     class MouseInputHandler implements MouseHandler {
@@ -271,3 +291,6 @@ public class Game {
 
 
 }
+
+
+

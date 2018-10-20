@@ -40,7 +40,22 @@ public class Board {
         picturesArray[row][col].draw();
     }
 
+    public void drawInitPieces(GamePiece[][] gameArray){
+
+        for (int row = 0; row < gameArray.length; row++) {
+            for (int col = 0; col < gameArray[0].length; col++) {
+                drawPiece(row,col, gameArray[row][col]);
+            }
+        }
+    }
+
     public void drawAllPieces(GamePiece[][] gameArray){
+
+        for (int row = 0; row < gameArray.length; row++) {
+            for (int col = 0; col < gameArray[0].length; col++) {
+                picturesArray[row][col].delete();
+            }
+        }
 
         for (int row = 0; row < gameArray.length; row++) {
             for (int col = 0; col < gameArray[0].length; col++) {

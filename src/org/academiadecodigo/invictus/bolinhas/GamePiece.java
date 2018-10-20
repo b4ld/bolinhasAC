@@ -7,7 +7,8 @@ public enum GamePiece {
     AMARELO("assets/yellow.png"),
     VERMELHO("assets/red.png"),
     ROSA("assets/pink.png"),
-    LARANJA("assets/orange.png");
+    LARANJA("assets/orange.png"),
+    DETONATION("assets/explosion.png");
 
     private String pieceAsset;
 
@@ -17,5 +18,9 @@ public enum GamePiece {
 
     public String getPieceAsset() {
         return this.pieceAsset;
+    }
+
+    public void set(){
+
     }
 }
