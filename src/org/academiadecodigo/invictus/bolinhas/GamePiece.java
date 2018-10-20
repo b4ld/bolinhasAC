@@ -8,6 +8,8 @@ public enum GamePiece {
     VERMELHO("assets/red.png"),
     ROSA("assets/pink.png"),
     LARANJA("assets/orange.png"),
+    CINZA("assets/grey.png"),
+    BROWN("assets/brown.png"),
     DETONATION("assets/explosion.png");
 
     private String pieceAsset;

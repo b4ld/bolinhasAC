@@ -19,13 +19,10 @@ public class Game {
     MouseHandler mouseHandler;
     MouseEvent mouseEvent;
 
-
     private Picture startMenuBackground = new Picture(Board.PADDING, Board.PADDING, "assets/logobolinhas.png");
     private Board gameBoard;
     private Boolean outOfBackground = false;
-
     private GamePiece[][] gameArray;
-
 
     public Game() {
         mouseHandler = new MouseInputHandler();
@@ -40,7 +37,6 @@ public class Game {
 
     public void startMenuInit() {
 
-        System.out.println("oksndfpivnhif");
         startMenuBackground.delete();
         System.out.println("deleted image");
         gameInit();
@@ -48,7 +44,6 @@ public class Game {
 
 
     }
-
 
     public void gameInit() {
 
