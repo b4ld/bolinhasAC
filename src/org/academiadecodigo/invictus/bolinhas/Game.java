@@ -5,6 +5,9 @@ import org.academiadecodigo.simplegraphics.mouse.MouseEvent;
 import org.academiadecodigo.simplegraphics.mouse.MouseEventType;
 import org.academiadecodigo.simplegraphics.mouse.MouseHandler;
 
+import java.awt.*;
+import java.util.HashSet;
+
 public class Game {
 
     public static int TOTAL_COLUMNS = 10;
@@ -58,10 +61,26 @@ public class Game {
         gameArray[row_FirstClick][col_FirstClick] = gameArray[row_SecondClick][col_SecondClick];
         gameArray[row_SecondClick][col_SecondClick] = temp;
 
-        System.out.println(findConnectedPieces(row_FirstClick, col_FirstClick, gameArray));
-        System.out.println("first counted");
-        System.out.println(findConnectedPieces(row_SecondClick, col_SecondClick, gameArray));
-        System.out.println("second counted");
+    //    HashSet<Point> matches = new HashSet<>(); //basta uma lista para os testes de ambos os lados, mas, para testes, usar uma para cada tree
+
+        HashSet<Point> matchesFirst = new HashSet<>();
+        HashSet<Point> matchesSecond = new HashSet<>();
+
+        locateNeighbors(row_FirstClick, col_FirstClick, pointAt(row_FirstClick,col_FirstClick), matchesFirst);
+        locateNeighbors(row_SecondClick, col_SecondClick, pointAt(row_SecondClick,col_SecondClick), matchesSecond);
+
+//        locateNeighbors(row_FirstClick, col_FirstClick, pointAt(row_FirstClick,col_FirstClick), matches);
+//        locateNeighbors(row_SecondClick, col_SecondClick, pointAt(row_SecondClick,col_SecondClick), matches);
+
+        System.out.println(matchesFirst.size());
+        System.out.println(matchesSecond.size());
+
+//        System.out.println(matches.size());
+
+//        System.out.println(findConnectedPieces(row_FirstClick, col_FirstClick, gameArray));
+//        System.out.println("first counted");
+//        System.out.println(findConnectedPieces(row_SecondClick, col_SecondClick, gameArray));
+//        System.out.println("second counted");
 
         /*
 
@@ -100,6 +119,50 @@ public class Game {
     }
 
 
+    public GamePiece pointAt(int row, int column) {
+
+        return gameArray[row][column];
+
+    }
+
+    private void locateNeighbors(int row, int col, GamePiece color, HashSet<Point> matches) {
+
+        Point p = new Point(row, col);
+
+        if (matches.contains(p)) {
+            return;
+        } else {
+            matches.add(p);
+        }
+
+        //Check east
+        if (col + 1 < gameArray[0].length){
+            if (pointAt(row, col + 1) == color)
+                locateNeighbors(row, col + 1, color, matches);
+        }
+
+        //Check south
+        if (row + 1 < gameArray.length){
+            if (pointAt(row + 1, col) == color)
+                locateNeighbors(row + 1, col, color, matches);
+        }
+
+        //Check west
+        if (col - 1 >= 0) {
+            if (pointAt(row, col - 1) == color)
+                locateNeighbors(row, col - 1, color, matches);
+        }
+
+        //Check north
+        if (row - 1 >= 0) {
+            if (pointAt(row - 1, col) == color)
+                locateNeighbors(row - 1, col, color, matches);
+        }
+
+    }
+
+    /*
+
     //find similar pieces to the one in a(a),b(b)
     public int findConnectedPieces(int a, int b, GamePiece[][] array) {
 
@@ -136,6 +199,7 @@ public class Game {
         return up + left + right + down + 1;
     }
 
+*/
 
     public void detonate(int row, int col, GamePiece[][] array) {//marca com null os estouros
 

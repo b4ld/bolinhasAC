@@ -1,5 +1,6 @@
 /*
 
+
 package org.academiadecodigo.invictus.bolinhas;
 
 import java.awt.*;
@@ -30,7 +31,7 @@ public class Testes {
 
         }
 
-        public Gem at(int row, int column) {
+        public Gem pointAt(int row, int column) {
 
             return board[row][column];
 
@@ -61,7 +62,7 @@ public class Testes {
             int y = (int)(touchPos.y / 72);
 
             if(x < rows && y < columns) {
-                Gem g = this.at(x, y);
+                Gem g = this.pointAt(x, y);
 
                 HashSet<Point> matches = new HashSet<Point>();
 
@@ -89,38 +90,34 @@ public class Testes {
             //Check north
             if(y + 1 < columns)
             {
-                if(this.at(x, y + 1).getColor() == color)
+                if(this.pointAt(x, y + 1).getColor() == color)
                     locateNeighbors(x, y + 1, color, matches);
             }
 
             //Check east
             if(x + 1 < rows)
             {
-                if(this.at(x + 1, y).getColor() == color)
+                if(this.pointAt(x + 1, y).getColor() == color)
                     locateNeighbors(x + 1, y, color, matches);
             }
 
             //Check south
             if(y - 1 >= 0)
             {
-                if(this.at(x, y - 1).getColor() == color)
+                if(this.pointAt(x, y - 1).getColor() == color)
                     locateNeighbors(x, y - 1, color, matches);
             }
 
             //Check west
             if(x - 1 >= 0)
             {
-                if(this.at(x - 1, y).getColor() == color)
+                if(this.pointAt(x - 1, y).getColor() == color)
                     locateNeighbors(x - 1, y, color, matches);
             }
 
         }
 
 
-
-
-
 }
-
 
 */
