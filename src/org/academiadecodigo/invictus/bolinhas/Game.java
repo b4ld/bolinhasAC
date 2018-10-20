@@ -58,26 +58,33 @@ public class Game {
         gameArray[row_FirstClick][col_FirstClick] = gameArray[row_SecondClick][col_SecondClick];
         gameArray[row_SecondClick][col_SecondClick] = temp;
 
+        System.out.println(findConnectedPieces(row_FirstClick, col_FirstClick, gameArray));
+        System.out.println("first counted");
+        System.out.println(findConnectedPieces(row_SecondClick, col_SecondClick, gameArray));
+        System.out.println("second counted");
 
-        System.out.println(findConnectedPieces(col_FirstClick, row_FirstClick, gameArray));
-    //    System.out.println(findConnectedPieces(r§ow_SecondClick, col_SecondClick, gameArray));
-
+        /*
 
         //conta pecas similares aquelas que foram swapped
-     //   if (findConnectedPieces(row_FirstClick, col_FirstClick, gameArray) >= 3) {
-    //        detonate(row_FirstClick, col_FirstClick, gameArray);
-     //   }
+        if (findConnectedPieces(row_FirstClick, col_FirstClick, gameArray) >= 3) {
+            System.out.println("ping");
+        //    detonate(row_FirstClick, col_FirstClick, gameArray);
+        }
 
-      //  if (findConnectedPieces(row_SecondClick, col_SecondClick, gameArray) >= 3) {
-    //        detonate(row_SecondClick, col_SecondClick, gameArray);
-     //   }
+        if (findConnectedPieces(row_SecondClick, col_SecondClick, gameArray) >= 3) {
+            System.out.println("pong");
+      //      detonate(row_SecondClick, col_SecondClick, gameArray);
+        }
 
         //testes explosoes e etc
-
+        System.out.println("wrwrw");
+        System.out.println("wrwrw");
 
         //desenha peças trocadas se nada explodiu e tal
-        gameBoard.drawPiece(row_FirstClick, col_FirstClick, gameArray[row_FirstClick][col_FirstClick]);
-        gameBoard.drawPiece(row_SecondClick, col_SecondClick, gameArray[row_SecondClick][col_SecondClick]);
+      //  gameBoard.drawPiece(row_FirstClick, col_FirstClick, gameArray[row_FirstClick][col_FirstClick]);
+      //  gameBoard.drawPiece(row_SecondClick, col_SecondClick, gameArray[row_SecondClick][col_SecondClick]);
+
+*/
 
     }
 
@@ -102,25 +109,25 @@ public class Game {
         boolean canRight = (b + 1 < array[0].length);
         boolean canLeft = (b - 1 >= 0);
 
-        GamePiece value = array[a][b];
+        GamePiece testValue = array[a][b];
 
         int up = 0;
         int down = 0;
         int right = 0;
         int left = 0;
 
-        //isto nao funciona pq ele nao chega a marcar com valores 2 os que quer ver encontrados
+        array[a][b] = GamePiece.LARANJA;
 
-        if (canUp && array[a - 1][b] == value) {
+        if (canUp && array[a - 1][b] == testValue) {
             up = findConnectedPieces(a - 1, b, array);
         }
-        if (canDown && array[a + 1][b] == value) {
+        if (canDown && array[a + 1][b] == testValue) {
             down = findConnectedPieces(a + 1, b, array);
         }
-        if (canLeft && array[a][b - 1] == value) {
+        if (canLeft && array[a][b - 1] == testValue) {
             left = findConnectedPieces(a, b - 1, array);
         }
-        if (canRight && array[a][b + 1] == value) {
+        if (canRight && array[a][b + 1] == testValue) {
             right = findConnectedPieces(a, b + 1, array);
         }
 

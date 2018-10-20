@@ -34,6 +34,7 @@ public class Board {
     }
 
     public void drawPiece(int row, int col, GamePiece piece) {
+
         System.out.println(row + " - " + col + " : " + piece.getPieceAsset());
         picturesArray[row][col] = new Picture(col * CELL_SIZE + PADDING, row * CELL_SIZE + PADDING, piece.getPieceAsset());
         picturesArray[row][col].draw();
