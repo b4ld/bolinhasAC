@@ -38,4 +38,19 @@ public class Sound {
             ex.getMessage();
         }
     }
+
+    public void loop(){
+        try{
+
+        File clipFile = new File(this.path);
+        audioStrmObj = AudioSystem.getAudioInputStream(clipFile);
+        AudioFormat format = audioStrmObj.getFormat();
+        DataLine.Info info = new DataLine.Info(Clip.class, format);
+        audioClip = (Clip) AudioSystem.getLine(info);
+        audioClip.open(audioStrmObj);
+        audioClip.loop(20);
+        }catch (Exception eo){
+            eo.getMessage();
+        }
+    }
 }

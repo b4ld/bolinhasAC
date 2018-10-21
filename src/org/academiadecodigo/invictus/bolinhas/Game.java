@@ -27,6 +27,14 @@ public class Game {
     private GamePiece[][] gameArray;
     private Rectangle rect;
 
+
+    //Sounds
+    private Sound initMenu = new Sound("assets/sounds/menu.wav");
+
+    private Sound explosion = new Sound("assets/sounds/slap.wav");
+
+
+
     public Game() {
         mouseHandler = new MouseInputHandler();
         mouseBoard = new Mouse(mouseHandler);
@@ -36,10 +44,11 @@ public class Game {
 
         //Draw the background
         startMenuBackground.draw();
+        initMenu.loop();
     }
 
     public void startMenuInit() {
-
+        initMenu.close();
         startMenuBackground.delete();
         System.out.println("deleted image background");
         gameInit();
@@ -220,6 +229,21 @@ public class Game {
 
         }
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+           
+        explosion.open();
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        explosion.close();
+            }
+        }).start();
+
 
     }
 
@@ -288,14 +312,22 @@ public class Game {
         @Override
         public void mouseClicked(MouseEvent mouseEvent) {
 
+
             X_mouse = ((int) mouseEvent.getX() - Board.PADDING) / Board.CELL_SIZE;//convert pixel column
             Y_mouse = ((int) mouseEvent.getY() - Board.PADDING) / Board.CELL_SIZE;//convert pixel row
             System.out.println(X_mouse + " < X --- Y > " + Y_mouse);
 
+            Sound clickSound = new Sound("assets/sounds/click.wav");
+            clickSound.open();
             //myGrid.removeImg(X_mouse,Y_mouse);
-
-
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             //Flag to exit of StartBackgroundImage after click START
+            clickSound.close();
+
             if (!outOfBackground) {
                 if ((X_mouse == 4 || X_mouse == 5) && (Y_mouse == 3 || Y_mouse == 4)) {
                     System.out.println("startMenuInit");
