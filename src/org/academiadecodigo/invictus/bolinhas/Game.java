@@ -1,6 +1,5 @@
 package org.academiadecodigo.invictus.bolinhas;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.mouse.Mouse;
 import org.academiadecodigo.simplegraphics.mouse.MouseEvent;
@@ -99,6 +98,17 @@ public class Game {
             detonate(matchesSecond);
         }
 
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            System.out.println("thread sleep error");
+            System.out.println(e.getMessage());
+        }
+
+        drop();
+
+        refill();
+
         //testes explosoes e etc
 
         //desenha peças trocadas se nada explodiu e tal
@@ -180,129 +190,50 @@ public class Game {
     }
 
 
+    public void drop() {
 
-    /*
+        //   int nRows = gam.length;
+        //   int nCols = arrayPic[0].length;
+        //   Picture pi = new Picture();
 
-    //find similar pieces to the one in a(a),b(b)
-    public int findConnectedPieces(int a, int b, GamePiece[][] array) {
+        for (int col = 0; col < TOTAL_COLUMNS; col++) {
 
-        //wall tests
-        boolean canUp = (a - 1 >= 0);
-        boolean canDown = (a + 1 < array.length);
-        boolean canRight = (b + 1 < array[0].length);
-        boolean canLeft = (b - 1 >= 0);
+            LinkedList<GamePiece> list = new LinkedList<>();
 
-        GamePiece testValue = array[a][b];
-
-        if(testValue==GamePiece.LARANJA) return 0; //a explosao ja passou por aqui, salta fora
-
-        int up = 0;
-        int down = 0;
-        int right = 0;
-        int left = 0;
-
-        array[a][b] = GamePiece.LARANJA;
-
-        if (canUp && array[a - 1][b] == testValue) {
-            up = findConnectedPieces(a - 1, b, array);
-        }
-        if (canDown && array[a + 1][b] == testValue) {
-            down = findConnectedPieces(a + 1, b, array);
-        }
-        if (canLeft && array[a][b - 1] == testValue) {
-            left = findConnectedPieces(a, b - 1, array);
-        }
-        if (canRight && array[a][b + 1] == testValue) {
-            right = findConnectedPieces(a, b + 1, array);
-        }
-
-        return up + left + right + down + 1;
-    }
-
-
-
-    public void detonate(int row, int col, GamePiece[][] array) {//marca com null os estouros
-
-        //wall tests
-        boolean canUp = (row - 1 >= 0);
-        boolean canDown = (row + 1 < array.length);
-        boolean canRight = (col + 1 < array[0].length);
-        boolean canLeft = (col - 1 >= 0);
-
-        GamePiece value = array[row][col];
-
-        array[row][col] = null;//make boom
-
-        if (canUp && array[row - 1][col] == value) {
-            detonate(row - 1, col, array);
-        }
-        if (canDown && array[row + 1][col] == value) {
-            detonate(row + 1, col, array);
-        }
-        if (canLeft && array[row][col - 1] == value) {
-            detonate(row, col - 1, array);
-        }
-        if (canRight && array[row][col + 1] == value) {
-            detonate(row, col + 1, array);
-        }
-
-
-    }
-
-*/
-
-    //Quedas e delete exploded ____________________________________________
-        public static void deleteDestroyedPiece() {
-
-        }
-
-//..................ta fudido
-        public static void Drop(Picture[][] arrayPic) {
-
-
-
-            System.out.println("OUTPUTS:");
-
-            System.out.println("rows " + arrayPic.length);
-            System.out.println("cols " + arrayPic[0].length);
-
-            int nRows = arrayPic.length;
-            int nCols = arrayPic[0].length;
-            Picture pi = new Picture();
-
-            for (int col = 0; col < nCols; col++) {
-
-                LinkedList<Picture> list = new LinkedList<>();
-
-                for (int row = 0; row < nRows; row++) {
-                    if (arrayPic[row][col].equals(GamePiece.DETONATION)) {
-                        list.add(arrayPic[row][col]);
-                    }
+            for (int row = 0; row < TOTAL_ROWS; row++) {
+                if (gameArray[row][col] != GamePiece.DETONATION) {
+                    list.add(gameArray[row][col]);
                 }
-
-
-                int listSize = list.size();
-
-
-                for (int row = 0; row < (nRows - listSize); row++) {
-
-                    arrayPic[row][col] = pi;
-                }
-                for (int row = (nRows - listSize); row < nRows; row++) {
-
-                    arrayPic[row][col] = list.removeFirst();
-                }
-
-
             }
 
 
+            int listSize = list.size();
+
+            for (int row = 0; row < (TOTAL_ROWS - listSize); row++) {
+                gameArray[row][col] = GamePiece.DETONATION;
+            }
+
+            for (int row = (TOTAL_ROWS - listSize); row < TOTAL_ROWS; row++) {
+                gameArray[row][col] = list.removeFirst();
+            }
 
         }
 
+    }
 
+    public void refill() {
 
-//..................ta fudido
+        for (int row = 0; row < TOTAL_ROWS; row++) {
+            for (int col = 0; col < TOTAL_COLUMNS; col++) {
+                if (gameArray[row][col] == GamePiece.DETONATION) {
+                    gameArray[row][col] = GamePieceFactory.getNewPiece();
+                }
+            }
+        }
+        gameBoard.drawAllPieces(gameArray);
+
+    }
+
 
     //---------
 
@@ -344,7 +275,7 @@ public class Game {
                     System.out.println("First Click");
                     isFirstClick = false;
 
-                    System.out.println(col_FirstClick+"  "+row_FirstClick);
+                    System.out.println(col_FirstClick + "  " + row_FirstClick);
                     //Quadradinho para seleçao do cenas------------------------------
                     //rect = new Rectangle(mouseEvent.getX()-43,mouseEvent.getY()-50,100,100);
                     //rect.setColor(Color.BLUE);
@@ -362,7 +293,7 @@ public class Game {
                         swapPiece(col_FirstClick, row_FirstClick, col_SecondClick, row_SecondClick);
                     }
                     //delete do quadradinho
-                    rect.delete();
+                    //  rect.delete();
 
                 }
             }
