@@ -346,9 +346,9 @@ public class Game {
 
                     System.out.println(col_FirstClick+"  "+row_FirstClick);
                     //Quadradinho para seleçao do cenas------------------------------
-                    rect = new Rectangle(mouseEvent.getX()-43,mouseEvent.getY()-50,100,100);
-                    rect.setColor(Color.BLUE);
-                    rect.draw();
+                    //rect = new Rectangle(mouseEvent.getX()-43,mouseEvent.getY()-50,100,100);
+                    //rect.setColor(Color.BLUE);
+                    //rect.drawi();
 
                     //myGrid.fillCell(col_FirstClick,row_FirstClick);
 
