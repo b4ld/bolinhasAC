@@ -1,5 +1,7 @@
 package org.academiadecodigo.invictus.bolinhas;
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.mouse.Mouse;
 import org.academiadecodigo.simplegraphics.mouse.MouseEvent;
 import org.academiadecodigo.simplegraphics.mouse.MouseEventType;
@@ -9,7 +11,6 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Game {
@@ -25,6 +26,7 @@ public class Game {
     private Board gameBoard;
     private Boolean outOfBackground = false;
     private GamePiece[][] gameArray;
+    private Rectangle rect;
 
     public Game() {
         mouseHandler = new MouseInputHandler();
@@ -34,13 +36,13 @@ public class Game {
         gameBoard = new Board();
 
         //Draw the background
-        //startMenuBackground.draw();
+        startMenuBackground.draw();
     }
 
     public void startMenuInit() {
 
         startMenuBackground.delete();
-        System.out.println("deleted image");
+        System.out.println("deleted image background");
         gameInit();
         System.out.println("Game initiated");
 
@@ -171,7 +173,9 @@ public class Game {
             Point point = detonations.next();
             gameArray[point.x][point.y] = GamePiece.DETONATION;
             gameArray[point.x][point.y] = GamePiece.DETONATION;
+
         }
+
 
     }
 
@@ -247,36 +251,32 @@ public class Game {
 
 */
 
-    //Quedas e delete exploded
+    //Quedas e delete exploded ____________________________________________
+        public static void deleteDestroyedPiece() {
 
-
-        public static void print2D(String mat[][]) {
-            for (String[] row : mat) // Loop through all rows
-                System.out.println(Arrays.toString(row)); // converting each row as string and then printing in a separate line
         }
 
-
-
-
-        public static void Drop(String[][] args) {
+//..................ta fudido
+        public static void Drop(Picture[][] arrayPic) {
 
 
 
             System.out.println("OUTPUTS:");
 
-            System.out.println("rows " + args.length);
-            System.out.println("cols " + args[0].length);
+            System.out.println("rows " + arrayPic.length);
+            System.out.println("cols " + arrayPic[0].length);
 
-            int nRows = args.length;
-            int nCols = args[0].length;
+            int nRows = arrayPic.length;
+            int nCols = arrayPic[0].length;
+            Picture pi = new Picture();
 
             for (int col = 0; col < nCols; col++) {
 
-                LinkedList<String> list = new LinkedList<>();
+                LinkedList<Picture> list = new LinkedList<>();
 
                 for (int row = 0; row < nRows; row++) {
-                    if (args[row][col].equals("i")) {
-                        list.add(args[row][col]);
+                    if (arrayPic[row][col].equals(GamePiece.DETONATION)) {
+                        list.add(arrayPic[row][col]);
                     }
                 }
 
@@ -286,23 +286,23 @@ public class Game {
 
                 for (int row = 0; row < (nRows - listSize); row++) {
 
-                    args[row][col] = "x";
+                    arrayPic[row][col] = pi;
                 }
                 for (int row = (nRows - listSize); row < nRows; row++) {
 
-                    args[row][col] = list.removeFirst();
+                    arrayPic[row][col] = list.removeFirst();
                 }
 
 
             }
 
-            print2D(args);
 
 
         }
 
 
 
+//..................ta fudido
 
     //---------
 
@@ -344,6 +344,12 @@ public class Game {
                     System.out.println("First Click");
                     isFirstClick = false;
 
+                    System.out.println(col_FirstClick+"  "+row_FirstClick);
+                    //Quadradinho para seleçao do cenas------------------------------
+                    rect = new Rectangle(mouseEvent.getX()-43,mouseEvent.getY()-50,100,100);
+                    rect.setColor(Color.BLUE);
+                    rect.draw();
+
                     //myGrid.fillCell(col_FirstClick,row_FirstClick);
 
                 } else {
@@ -355,6 +361,8 @@ public class Game {
                     if (testSwap(col_FirstClick, row_FirstClick, col_SecondClick, row_SecondClick)) {//se jogada valida (distancia de clicks = 1)
                         swapPiece(col_FirstClick, row_FirstClick, col_SecondClick, row_SecondClick);
                     }
+                    //delete do quadradinho
+                    rect.delete();
 
                 }
             }
