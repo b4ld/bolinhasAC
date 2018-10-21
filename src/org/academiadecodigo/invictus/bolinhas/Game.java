@@ -60,10 +60,48 @@ public class Game {
             }
         }
 
+      //  gameInitRandomizer();
+
         gameBoard.drawInitPieces(gameArray);
 
     }
 
+/*
+    public void gameInitRandomizer(){
+
+        //wall tests
+        boolean canUp = (a - 1 >= 0);
+        boolean canDown = (a + 1 < array.length);
+        boolean canRight = (b + 1 < array[0].length);
+        boolean canLeft = (b - 1 >= 0);
+
+        int value = array[a][b];
+
+        int up = 0;
+        int down = 0;
+        int right = 0;
+        int left = 0;
+
+        array[a][b] = 2;//tambem serve como stop condition
+
+        if (canUp && array[a - 1][b] == value) {
+            up = findConnectedCells(a - 1, b, array);
+        }
+        if (canDown && array[a + 1][b] == value) {
+            down = findConnectedCells(a + 1, b, array);
+        }
+        if (canLeft && array[a][b - 1] == value) {
+            left = findConnectedCells(a, b - 1, array);
+        }
+        if (canRight && array[a][b + 1] == value) {
+            right = findConnectedCells(a, b + 1, array);
+        }
+
+        return up + left + right + down + 1;
+
+
+    }
+*/
 
     public void gameStart() {
 
@@ -109,15 +147,9 @@ public class Game {
 
         refill();
 
-
-
-        //testes explosoes e etc
-
-        //desenha peças trocadas se nada explodiu e tal
-//        gameBoard.drawPiece(row_FirstClick, col_FirstClick, gameArray[row_FirstClick][col_FirstClick]);
-//        gameBoard.drawPiece(row_SecondClick, col_SecondClick, gameArray[row_SecondClick][col_SecondClick]);
-
         gameBoard.redrawAllPieces(gameArray);
+
+        //Testar explosoes subsequentes?
 
 
     }
