@@ -1,9 +1,11 @@
-This is a game,
+This is THE game.
 
-The best game you will ever play, of kind of..
+The best game you will ever play, kind of....
 
 
-for more info plz contact Francisco of Academia de Código
+Bootcamp #21 - Academia de Codigo
+
+Pedro Varela, Pedro Carmezim, Sergio Mota, Rui Moreira, Joao Lopes
 
 
 
