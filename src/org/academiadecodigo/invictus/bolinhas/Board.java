@@ -4,6 +4,9 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.awt.*;
+import java.util.HashSet;
+
 
 public class Board {
 
@@ -49,7 +52,7 @@ public class Board {
         }
     }
 
-    public void drawAllPieces(GamePiece[][] gameArray){
+    public void redrawAllPieces(GamePiece[][] gameArray){
 
         for (int row = 0; row < gameArray.length; row++) {
             for (int col = 0; col < gameArray[0].length; col++) {
@@ -63,6 +66,11 @@ public class Board {
             }
         }
     }
+
+
+    public void animateDetonations(){
+    }
+
 
 
     public void swapPieceDraw(int Xp1, int Yp1, int Xp2, int Yp2) {

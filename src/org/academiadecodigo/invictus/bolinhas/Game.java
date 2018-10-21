@@ -84,30 +84,30 @@ public class Game {
         locateNeighbors(row_FirstClick, col_FirstClick, pointAt(row_FirstClick, col_FirstClick), matchesFirst);
         locateNeighbors(row_SecondClick, col_SecondClick, pointAt(row_SecondClick, col_SecondClick), matchesSecond);
 
-        //     System.out.println(matchesFirst.size());
-        //     System.out.println(matchesSecond.size());
-
         //conta pecas similares aquelas que foram swapped
         if (matchesFirst.size() >= 3) {
-            System.out.println("first");
+            //   System.out.println("first");
             detonate(matchesFirst);
         }
 
         if (matchesSecond.size() >= 3) {
-            System.out.println("second");
+            //   System.out.println("second");
             detonate(matchesSecond);
         }
 
+        gameBoard.redrawAllPieces(gameArray);
+
+
         try {
-            Thread.sleep(100);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             System.out.println("thread sleep error");
             System.out.println(e.getMessage());
         }
 
-        drop();
+        //   drop();
 
-        refill();
+        //   refill();
 
         //testes explosoes e etc
 
@@ -115,7 +115,7 @@ public class Game {
 //        gameBoard.drawPiece(row_FirstClick, col_FirstClick, gameArray[row_FirstClick][col_FirstClick]);
 //        gameBoard.drawPiece(row_SecondClick, col_SecondClick, gameArray[row_SecondClick][col_SecondClick]);
 
-        gameBoard.drawAllPieces(gameArray);
+        gameBoard.redrawAllPieces(gameArray);
 
 
     }
@@ -230,7 +230,7 @@ public class Game {
                 }
             }
         }
-        gameBoard.drawAllPieces(gameArray);
+        gameBoard.redrawAllPieces(gameArray);
 
     }
 
