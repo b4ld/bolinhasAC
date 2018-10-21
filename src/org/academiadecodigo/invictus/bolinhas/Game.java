@@ -284,6 +284,7 @@ public class Game {
                     isFirstClick = false;
 
                     //myGrid.fillCell(col_FirstClick,row_FirstClick);
+
                 } else {
                     col_SecondClick = X_mouse;
                     row_SecondClick = Y_mouse;
