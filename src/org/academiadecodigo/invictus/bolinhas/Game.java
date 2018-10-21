@@ -9,6 +9,8 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Arrays;
+import java.util.LinkedList;
 
 public class Game {
 
@@ -32,7 +34,7 @@ public class Game {
         gameBoard = new Board();
 
         //Draw the background
-        startMenuBackground.draw();
+        //startMenuBackground.draw();
     }
 
     public void startMenuInit() {
@@ -244,6 +246,65 @@ public class Game {
     }
 
 */
+
+    //Quedas e delete exploded
+
+
+        public static void print2D(String mat[][]) {
+            for (String[] row : mat) // Loop through all rows
+                System.out.println(Arrays.toString(row)); // converting each row as string and then printing in a separate line
+        }
+
+
+
+
+        public static void Drop(String[][] args) {
+
+
+
+            System.out.println("OUTPUTS:");
+
+            System.out.println("rows " + args.length);
+            System.out.println("cols " + args[0].length);
+
+            int nRows = args.length;
+            int nCols = args[0].length;
+
+            for (int col = 0; col < nCols; col++) {
+
+                LinkedList<String> list = new LinkedList<>();
+
+                for (int row = 0; row < nRows; row++) {
+                    if (args[row][col].equals("i")) {
+                        list.add(args[row][col]);
+                    }
+                }
+
+
+                int listSize = list.size();
+
+
+                for (int row = 0; row < (nRows - listSize); row++) {
+
+                    args[row][col] = "x";
+                }
+                for (int row = (nRows - listSize); row < nRows; row++) {
+
+                    args[row][col] = list.removeFirst();
+                }
+
+
+            }
+
+            print2D(args);
+
+
+        }
+
+
+
+
+    //---------
 
 
     class MouseInputHandler implements MouseHandler {

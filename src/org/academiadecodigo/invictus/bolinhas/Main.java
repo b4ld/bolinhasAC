@@ -6,7 +6,37 @@ public class Main {
 
         Game game= new Game();
         //game.startMenuInit(); //This is initialized in startMenu
-        game.gameStart();
+        //game.gameStart();
+
+
+
+
+
+        String[][] testarray = new String[][]{
+                {"x", "i", "i", "x", "x"},
+                {"x", "x", "x", "x", "x"},
+                {"x", "x", "x", "x", "x"},
+                {"x", "x", "x", "x", "x"},
+                {"x", "x", "x", "x", "x"},
+                {"x", "x", "x", "x", "i"},
+                {"x", "x", "x", "x", "x"},
+                {"x", "x", "x", "x", "x"},
+                {"x", "x", "x", "x", "x"},
+                {"x", "x", "x", "x", "x"},
+                {"x", "x", "x", "x", "x"},
+
+
+
+
+        };
+
+
+
+        Game.Drop(testarray);
+
+
+
+
 
     }
 
