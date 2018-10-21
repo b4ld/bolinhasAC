@@ -96,18 +96,20 @@ public class Game {
         }
 
         gameBoard.redrawAllPieces(gameArray);
-
+//        gameBoard.drawDetonations(gameArray);
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
-            System.out.println("thread sleep error");
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
-        //   drop();
+        drop();
 
-        //   refill();
+
+        refill();
+
+
 
         //testes explosoes e etc
 
@@ -230,7 +232,7 @@ public class Game {
                 }
             }
         }
-        gameBoard.redrawAllPieces(gameArray);
+        //   gameBoard.redrawAllPieces(gameArray);
 
     }
 
@@ -288,12 +290,17 @@ public class Game {
                     row_SecondClick = Y_mouse;
                     System.out.println("Second click");
                     isFirstClick = true;
+
                     //testes entram aqui
                     if (testSwap(col_FirstClick, row_FirstClick, col_SecondClick, row_SecondClick)) {//se jogada valida (distancia de clicks = 1)
-                        swapPiece(col_FirstClick, row_FirstClick, col_SecondClick, row_SecondClick);
+                        new Thread( new Runnable() {
+                            @Override
+                            public void run() {
+                                swapPiece(col_FirstClick, row_FirstClick, col_SecondClick, row_SecondClick);
+                            }
+                        }).start();
+
                     }
-                    //delete do quadradinho
-                    //  rect.delete();
 
                 }
             }

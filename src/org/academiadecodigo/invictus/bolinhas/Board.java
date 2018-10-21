@@ -65,10 +65,22 @@ public class Board {
                 drawPiece(row,col, gameArray[row][col]);
             }
         }
+
+        System.out.println("redrawn pieces");
     }
 
 
-    public void animateDetonations(){
+    public void drawDetonations(GamePiece[][] gameArray){
+
+        for (int row = 0; row < gameArray.length; row++) {
+            for (int col = 0; col < gameArray[0].length; col++) {
+                if(gameArray[row][col]==GamePiece.DETONATION){
+                    drawPiece(row,col, gameArray[row][col]);
+                }
+
+            }
+        }
+
     }
 
 
