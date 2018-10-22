@@ -108,9 +108,6 @@ public class Game {
         return true;
     }
 
-    public void gameStart() {
-
-    }
 
 
     public void swapPiece(int col_FirstClick, int row_FirstClick, int col_SecondClick, int row_SecondClick) {
