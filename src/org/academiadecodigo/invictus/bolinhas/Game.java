@@ -29,9 +29,9 @@ public class Game {
 
 
     //Sounds
-    private Sound initMenu = new Sound("assets/sounds/menu.wav");
+    private Sound initMenu = new Sound("assets/menu.wav");
 
-    private Sound explosion = new Sound("assets/sounds/slap.wav");
+    private Sound explosion = new Sound("assets/slap.wav");
 
 
     public Game() {
@@ -357,7 +357,7 @@ public class Game {
             Y_mouse = ((int) mouseEvent.getY() - Board.PADDING) / Board.CELL_SIZE;//convert pixel row
             System.out.println(X_mouse + " < X --- Y > " + Y_mouse);
 
-            Sound clickSound = new Sound("assets/sounds/click.wav");
+            Sound clickSound = new Sound("assets/click.wav");
             clickSound.open();
             //myGrid.removeImg(X_mouse,Y_mouse);
             try {

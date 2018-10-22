@@ -1,14 +1,14 @@
 <?xml version="1.0" ?>
-<project name="GANDASPUSSIES" default="jarfile">
+<project name="bolinhasAC" default="jarfile">
 
     <target name="init" description="Initializes properties">
-        <property name="project.name" value="DONTCHANGEME"/>
+        <property name="project.name" value="bolinhasAC"/>
         <property name="src.dir" value="src"/>
-        <property name="main.class" value="org.academiadecodigo.test.Main"/>
+        <property name="main.class" value="org.academiadecodigo.invictus.bolinhas.Main"/>
         <property name="build.dir" value="build"/>
         <property name="classes.dir" value="${build.dir}/classes"/>
-        <property name="lib.dir" value="lib"/>
-        <property name="resource.dir" value="resources"/>
+        <property name="lib.dir" value="libs"/>
+        <property name="resource.dir" value="assets"/>
         <path id="classpath">
             <fileset dir="${lib.dir}" includes="**/*.jar"/>
         </path>
@@ -36,7 +36,7 @@
             </manifest>
 
             <zipgroupfileset dir="${lib.dir}" includes="*.jar"/>
-            <fileset dir=".">
+            <fileset dir="assets">
                 <include name="**/${resource.dir}/**"/>
             </fileset>
         </jar>
