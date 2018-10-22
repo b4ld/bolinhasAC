@@ -69,11 +69,49 @@ public class Game {
             }
         }
 
-      //  gameInitRandomizer();
+        gameCheckAllDetonations();
 
         gameBoard.drawInitPieces(gameArray);
 
     }
+
+
+    public void gameCheckAllDetonations() {
+
+        HashSet<Point> matches = new HashSet<>();
+
+        for (int row = 0; row < TOTAL_ROWS; row++) {
+            for (int col = 0; col < TOTAL_COLUMNS; col++) {
+
+                while (true) {
+
+                    matches.clear();
+
+                    locateNeighbors(row, col, pointAt(row, col), matches);
+
+                    if (matches.size() < 3)
+                        break;
+
+                    if (matches.size() >= 3) {
+                        Iterator<Point> piecesToRegen = matches.iterator();
+
+                        while (piecesToRegen.hasNext()) {
+                            Point point = piecesToRegen.next();
+                            gameArray[point.x][point.y] = GamePieceFactory.getNewPiece();
+                        }
+                    }
+
+                }
+
+            }
+        }
+    }
+
+
+
+
+
+
 
 /*
     public void gameInitRandomizer(){
