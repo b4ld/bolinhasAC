@@ -68,14 +68,14 @@ public class Game {
             }
         }
 
-        gameCheckAllDetonations();
+        gameCheckInitialDetonations();
 
         gameBoard.drawInitPieces(gameArray);
 
     }
 
 
-    public void gameCheckAllDetonations() {
+    public boolean gameCheckInitialDetonations() {
 
         HashSet<Point> matches = new HashSet<>();
 
@@ -105,6 +105,7 @@ public class Game {
             }
         }
 
+        return true;
     }
 
     public void gameStart() {
@@ -138,7 +139,6 @@ public class Game {
         }
 
         gameBoard.redrawAllPieces(gameArray);
-//        gameBoard.drawDetonations(gameArray);
 
         try {
             Thread.sleep(500);
@@ -148,14 +148,62 @@ public class Game {
 
         drop();
 
+        refill();
+
+        gameBoard.redrawAllPieces(gameArray);
+
+        //Testar explosoes subsequente?
+
+        autoDetonations();
+
+        gameBoard.redrawAllPieces(gameArray);
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        drop();
 
         refill();
 
         gameBoard.redrawAllPieces(gameArray);
 
-        //Testar explosoes subsequentes?
+        //     }
+
+    }
 
 
+    public boolean autoDetonations() {
+
+        HashSet<Point> matchesAll = new HashSet<>();
+
+        HashSet<Point> matches = new HashSet<>();
+
+        for (int row = 0; row < TOTAL_ROWS; row++) {
+            for (int col = 0; col < TOTAL_COLUMNS; col++) {
+
+                while (true) {
+
+                    matches.clear();
+
+                    locateNeighbors(row, col, pointAt(row, col), matches);
+
+                    if (matches.size() < 3)
+                        break;
+
+                    if (matches.size() >= 3) {
+                        matchesAll.addAll(matches);
+                        break;
+                    }
+
+                }
+
+            }
+        }
+        detonate(matchesAll);
+        return true;
     }
 
 
@@ -220,7 +268,7 @@ public class Game {
         while (detonations.hasNext()) {
             Point point = detonations.next();
             gameArray[point.x][point.y] = GamePiece.DETONATION;
-            //   gameArray[point.x][point.y] = GamePiece.DETONATION;
+            gameArray[point.x][point.y] = GamePiece.DETONATION;
 
         }
 
@@ -230,7 +278,7 @@ public class Game {
 
                 explosion.open();
                 try {
-                    Thread.sleep(200);
+                    Thread.sleep(300);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -288,7 +336,7 @@ public class Game {
     }
 
 
-    //---------
+//---------
 
 
     class MouseInputHandler implements MouseHandler {
@@ -336,7 +384,7 @@ public class Game {
                     System.out.println("First Click");
                     isFirstClick = false;
 
-//                    System.out.println(col_FirstClick + "  " + row_FirstClick);
+                    System.out.println(col_FirstClick + "  " + row_FirstClick);
                     //Quadradinho para seleçao do cenas------------------------------
                     //rect = new Rectangle(mouseEvent.getX()-43,mouseEvent.getY()-50,100,100);
                     //rect.setColor(Color.BLUE);
