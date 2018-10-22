@@ -34,7 +34,6 @@ public class Game {
     private Sound explosion = new Sound("assets/sounds/slap.wav");
 
 
-
     public Game() {
         mouseHandler = new MouseInputHandler();
         mouseBoard = new Mouse(mouseHandler);
@@ -69,14 +68,14 @@ public class Game {
             }
         }
 
-        gameCheckAllDetonations();
+        gameCheckInitialDetonations();
 
         gameBoard.drawInitPieces(gameArray);
 
     }
 
 
-    public void gameCheckAllDetonations() {
+    public boolean gameCheckInitialDetonations() {
 
         HashSet<Point> matches = new HashSet<>();
 
@@ -105,50 +104,9 @@ public class Game {
 
             }
         }
+
+        return true;
     }
-
-
-
-
-
-
-
-/*
-    public void gameInitRandomizer(){
-
-        //wall tests
-        boolean canUp = (a - 1 >= 0);
-        boolean canDown = (a + 1 < array.length);
-        boolean canRight = (b + 1 < array[0].length);
-        boolean canLeft = (b - 1 >= 0);
-
-        int value = array[a][b];
-
-        int up = 0;
-        int down = 0;
-        int right = 0;
-        int left = 0;
-
-        array[a][b] = 2;//tambem serve como stop condition
-
-        if (canUp && array[a - 1][b] == value) {
-            up = findConnectedCells(a - 1, b, array);
-        }
-        if (canDown && array[a + 1][b] == value) {
-            down = findConnectedCells(a + 1, b, array);
-        }
-        if (canLeft && array[a][b - 1] == value) {
-            left = findConnectedCells(a, b - 1, array);
-        }
-        if (canRight && array[a][b + 1] == value) {
-            right = findConnectedCells(a, b + 1, array);
-        }
-
-        return up + left + right + down + 1;
-
-
-    }
-*/
 
     public void gameStart() {
 
@@ -181,7 +139,6 @@ public class Game {
         }
 
         gameBoard.redrawAllPieces(gameArray);
-//        gameBoard.drawDetonations(gameArray);
 
         try {
             Thread.sleep(500);
@@ -191,14 +148,62 @@ public class Game {
 
         drop();
 
+        refill();
+
+        gameBoard.redrawAllPieces(gameArray);
+
+        //Testar explosoes subsequente?
+
+        autoDetonations();
+
+        gameBoard.redrawAllPieces(gameArray);
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        drop();
 
         refill();
 
         gameBoard.redrawAllPieces(gameArray);
 
-        //Testar explosoes subsequentes?
+        //     }
+
+    }
 
 
+    public boolean autoDetonations() {
+
+        HashSet<Point> matchesAll = new HashSet<>();
+
+        HashSet<Point> matches = new HashSet<>();
+
+        for (int row = 0; row < TOTAL_ROWS; row++) {
+            for (int col = 0; col < TOTAL_COLUMNS; col++) {
+
+                while (true) {
+
+                    matches.clear();
+
+                    locateNeighbors(row, col, pointAt(row, col), matches);
+
+                    if (matches.size() < 3)
+                        break;
+
+                    if (matches.size() >= 3) {
+                        matchesAll.addAll(matches);
+                        break;
+                    }
+
+                }
+
+            }
+        }
+        detonate(matchesAll);
+        return true;
     }
 
 
@@ -270,15 +275,15 @@ public class Game {
         new Thread(new Runnable() {
             @Override
             public void run() {
-           
-        explosion.open();
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        explosion.close();
+                explosion.open();
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                explosion.close();
             }
         }).start();
 
@@ -331,7 +336,7 @@ public class Game {
     }
 
 
-    //---------
+//---------
 
 
     class MouseInputHandler implements MouseHandler {
@@ -395,7 +400,7 @@ public class Game {
 
                     //testes entram aqui
                     if (testSwap(col_FirstClick, row_FirstClick, col_SecondClick, row_SecondClick)) {//se jogada valida (distancia de clicks = 1)
-                        new Thread( new Runnable() {
+                        new Thread(new Runnable() {
                             @Override
                             public void run() {
                                 swapPiece(col_FirstClick, row_FirstClick, col_SecondClick, row_SecondClick);
