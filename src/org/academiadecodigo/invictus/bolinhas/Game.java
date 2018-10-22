@@ -68,14 +68,14 @@ public class Game {
             }
         }
 
-        gameInitRandomizer();
+        gameCheckAllDetonations();
 
         gameBoard.drawInitPieces(gameArray);
 
     }
 
 
-    public void gameInitRandomizer() {
+    public void gameCheckAllDetonations() {
 
         HashSet<Point> matches = new HashSet<>();
 

@@ -26,14 +26,4 @@ public enum GamePiece {
         return (int) (Math.random() * (GamePiece.values().length-1)); // o ultimo caso é explosao, por isso nao se inclui
     }
 
-    public static int randomPieceValueExcept(GamePiece piece){
-        int randomPiece;
-
-        do {
-            randomPiece=(int) (Math.random() * (GamePiece.values().length-1));
-        } while(randomPiece==piece.ordinal());
-
-        return randomPiece;
-    }
-
 }
