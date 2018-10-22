@@ -152,7 +152,7 @@ public class Game {
 
         gameBoard.redrawAllPieces(gameArray);
 
-        //Testar explosoes subsequente?
+        //Testar explosoes subsequentes
 
         autoDetonations();
 
@@ -169,8 +169,6 @@ public class Game {
         refill();
 
         gameBoard.redrawAllPieces(gameArray);
-
-        //     }
 
     }
 
@@ -287,15 +285,10 @@ public class Game {
             }
         }).start();
 
-
     }
 
 
     public void drop() {
-
-        //   int nRows = gam.length;
-        //   int nCols = arrayPic[0].length;
-        //   Picture pi = new Picture();
 
         for (int col = 0; col < TOTAL_COLUMNS; col++) {
 
