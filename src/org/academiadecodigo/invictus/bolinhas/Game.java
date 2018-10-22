@@ -34,7 +34,6 @@ public class Game {
     private Sound explosion = new Sound("assets/sounds/slap.wav");
 
 
-
     public Game() {
         mouseHandler = new MouseInputHandler();
         mouseBoard = new Mouse(mouseHandler);
@@ -69,48 +68,44 @@ public class Game {
             }
         }
 
-      //  gameInitRandomizer();
+        gameInitRandomizer();
 
         gameBoard.drawInitPieces(gameArray);
 
     }
 
-/*
-    public void gameInitRandomizer(){
 
-        //wall tests
-        boolean canUp = (a - 1 >= 0);
-        boolean canDown = (a + 1 < array.length);
-        boolean canRight = (b + 1 < array[0].length);
-        boolean canLeft = (b - 1 >= 0);
+    public void gameInitRandomizer() {
 
-        int value = array[a][b];
+        HashSet<Point> matches = new HashSet<>();
 
-        int up = 0;
-        int down = 0;
-        int right = 0;
-        int left = 0;
+        for (int row = 0; row < TOTAL_ROWS; row++) {
+            for (int col = 0; col < TOTAL_COLUMNS; col++) {
 
-        array[a][b] = 2;//tambem serve como stop condition
+                while (true) {
 
-        if (canUp && array[a - 1][b] == value) {
-            up = findConnectedCells(a - 1, b, array);
+                    matches.clear();
+
+                    locateNeighbors(row, col, pointAt(row, col), matches);
+
+                    if (matches.size() < 3)
+                        break;
+
+                    if (matches.size() >= 3) {
+                        Iterator<Point> piecesToRegen = matches.iterator();
+
+                        while (piecesToRegen.hasNext()) {
+                            Point point = piecesToRegen.next();
+                            gameArray[point.x][point.y] = GamePieceFactory.getNewPiece();
+                        }
+                    }
+
+                }
+
+            }
         }
-        if (canDown && array[a + 1][b] == value) {
-            down = findConnectedCells(a + 1, b, array);
-        }
-        if (canLeft && array[a][b - 1] == value) {
-            left = findConnectedCells(a, b - 1, array);
-        }
-        if (canRight && array[a][b + 1] == value) {
-            right = findConnectedCells(a, b + 1, array);
-        }
-
-        return up + left + right + down + 1;
-
 
     }
-*/
 
     public void gameStart() {
 
@@ -225,22 +220,22 @@ public class Game {
         while (detonations.hasNext()) {
             Point point = detonations.next();
             gameArray[point.x][point.y] = GamePiece.DETONATION;
-            gameArray[point.x][point.y] = GamePiece.DETONATION;
+            //   gameArray[point.x][point.y] = GamePiece.DETONATION;
 
         }
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-           
-        explosion.open();
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        explosion.close();
+                explosion.open();
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                explosion.close();
             }
         }).start();
 
@@ -341,7 +336,7 @@ public class Game {
                     System.out.println("First Click");
                     isFirstClick = false;
 
-                    System.out.println(col_FirstClick + "  " + row_FirstClick);
+//                    System.out.println(col_FirstClick + "  " + row_FirstClick);
                     //Quadradinho para seleçao do cenas------------------------------
                     //rect = new Rectangle(mouseEvent.getX()-43,mouseEvent.getY()-50,100,100);
                     //rect.setColor(Color.BLUE);
@@ -357,7 +352,7 @@ public class Game {
 
                     //testes entram aqui
                     if (testSwap(col_FirstClick, row_FirstClick, col_SecondClick, row_SecondClick)) {//se jogada valida (distancia de clicks = 1)
-                        new Thread( new Runnable() {
+                        new Thread(new Runnable() {
                             @Override
                             public void run() {
                                 swapPiece(col_FirstClick, row_FirstClick, col_SecondClick, row_SecondClick);
